@@ -1,4 +1,4 @@
-
+# movie class definition
 class Movie():
 	def __init__(self, movieTitle, movieStoryline, posterImage, trailerYoutube):
 		self.title = movieTitle
