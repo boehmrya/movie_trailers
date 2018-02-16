@@ -8,8 +8,8 @@ for the movie genre and number of movies to display, and then open a browser win
 ## Dependencies
 You must install the following python modules before running:
 
-json
-request
-os
-re
-webbrowser
+* json
+* request
+* os
+* re
+* webbrowser
