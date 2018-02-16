@@ -3,4 +3,13 @@ This site pulls in data from themoviedb.org and displays a list of movies on a w
 
 ## Usage
 run `python3 entertainment_center.py` from the root of the movie_trailers directory.  The program will prompt the user
-for the movie genre and number of movies to display.
+for the movie genre and number of movies to display, and then open a browser window and display the data.  The movies will be listed in order of popularity (as determined by themoviedb.org's own ratings)
+
+## Dependencies
+You must install the following python modules before running:
+
+json
+request
+os
+re
+webbrowser

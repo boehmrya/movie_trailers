@@ -36,11 +36,12 @@ while totalMovies < 1 or totalMovies > 20:
 req = requests.get("https://api.themoviedb.org/3/discover/movie?api_key=a480f73de28772662beca0b5fab53f97&language=en-US&sort_by=popularity.desc&with_genres=" + str(genreId))
 
 
-# build python dictionary
+# build python dictionary of api data to extract data below
 movieDict = json.loads(req.text)
 
 
-# adjust number of total movies if necessary
+# adjust number of total movies if the number of results
+# is less than the number requested by the user
 if len(movieDict['results']) < totalMovies:
 	totalMovies = len(movieDict['results'])
 
@@ -54,19 +55,21 @@ while i < totalMovies:
 	# build first three fields - title, storyline, and poster
 	title = thisMovie['title']
 	storyline = thisMovie['overview']
-	posterUrl = "https://image.tmdb.org/t/p/w200" + thisMovie['poster_path']
+	posterUrl = "https://image.tmdb.org/t/p/w200" + str(thisMovie['poster_path'])
+	releaseDate = thisMovie['release_date']
 
 	# build video url
 	movieId = thisMovie['id']
 	videoReq =requests.get("http://api.themoviedb.org/3/movie/" + str(movieId) + "/videos?api_key=a480f73de28772662beca0b5fab53f97&language=en-US")
 	videoDict = json.loads(videoReq.text)
 	if len(videoDict['results']) > 0:
-		print(videoDict)
 		videoKey = videoDict['results'][0]['key']
 		videoUrl = "https://www.youtube.com/watch?v=" + str(videoKey)
+	else:
+		videoUrl = ""
 
 	# create movie and add to list of all movies
-	newMovie = media.Movie(title, storyline, posterUrl, videoUrl)
+	newMovie = media.Movie(title, storyline, posterUrl, videoUrl, releaseDate)
 	movies.append(newMovie)
 
 	# move to next movie
